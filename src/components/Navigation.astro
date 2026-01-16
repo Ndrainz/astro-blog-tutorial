@@ -1,0 +1,43 @@
+---
+const links: Array<{href: string, title: string}> = [
+  { href: "/", title: "Home"},
+  { href: "/about/", title: "About"},
+  { href: "/blog/", title: "Blog"},
+]
+---
+
+<div id="main-menu" class="nav-links">
+  {links.map(link => <a href={link.href}>{link.title}</a>)}
+</div>
+
+<style>
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      text-align: center;
+      display: block;
+      color: #0d0950;
+      padding: 0.5rem 2rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-bottom: 2px solid black;
+
+      &:focus, &:hover {
+        background-color: #ff9776;
+      }
+    }
+  }
+
+  @media screen and (min-width: 636px) {
+    .nav-links {
+      flex-direction: row;
+    }
+  }
+</style>

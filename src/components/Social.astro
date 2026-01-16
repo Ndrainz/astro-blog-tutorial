@@ -1,0 +1,26 @@
+---
+type Props = {
+  platform: string;
+  username: string;
+}
+
+const { platform, username}: Props = Astro.props
+const link = `https://www.${platform}.com/${username}`
+---
+
+<a target="__blank" href={link}>{platform}!</a>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+</style>
