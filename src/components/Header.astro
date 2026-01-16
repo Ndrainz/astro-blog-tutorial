@@ -1,9 +1,20 @@
 ---
 import Navigation from "./Navigation.astro"
+import Menu from "./Menu.astro"
 ---
 
 <header>
   <nav>
+    <Menu />
     <Navigation />
   </nav>
 </header>
+
+<script>
+  const menu = document.querySelector(".menu")
+
+  menu?.addEventListener("click", ()=> {
+    const isExpanded = menu.getAttribute('aria-expanded') === "true"
+    menu.setAttribute('aria-expanded', (!isExpanded).toString())
+  })
+</script>
