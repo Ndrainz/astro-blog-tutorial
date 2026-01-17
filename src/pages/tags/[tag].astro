@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro"
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const allPosts = Object.values(import.meta.glob("../posts/*.md", { eager: true }))
+  const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())]
+
+  return uniqueTags.map((tag) => {
+    const filteredPost = allPosts.filter((post: any) => post.frontmatter.tags.includes(tag))
+    return {
+      params: { tag },
+      props: { posts: filteredPost }
+    }
+  })
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+
+<BaseLayout pageTitle={String(tag)}>
+  <p>Post tagged with {tag}</p>
+  <ul>
+    {posts.map(post => <li><a href={post.url}>{post.frontmatter.url}</a></li>)}
+  </ul>
+</BaseLayout>
